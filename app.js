@@ -48,55 +48,98 @@ const places = {
   sweetcome: { name: 'SweetCome BKK', city: '曼谷', kind: '午餐备选', image: 'web_photos/crab_fried_rice.jpg', description: '吞武里午餐备选，出发当天以营业状态为准。', tags: ['午餐', '备选'], query: 'SweetCome BKK Bangkok' },
   tanDinh: { name: 'Nhà Thờ Giáo Xứ Tân Định', city: '胡志明', kind: '教堂', image: 'web_photos/notre_dame.jpg', description: '10 月 8 日原计划的第一站，但返程航班很早，实际应改为提前退房去机场。', tags: ['第三郡', '需调整'], query: 'Tan Dinh Church Ho Chi Minh City' },
   clothes: { name: 'MOLLYNISTA / COCOSIN / L’ESPOIR 等', city: '胡志明', kind: '服装购物带', image: 'web_photos/saigon_square.jpg', description: '10 月 8 日原购物计划因 07:10 航班取消；如改签返程，可恢复第三郡购物。', tags: ['购物', '原计划'], query: 'Nguyen Trai shopping street Ho Chi Minh City' },
+
+  sevenEleven: { name: '7-Eleven（早餐/夜宵补给）', city: '曼谷', kind: '便利店', image: 'web_photos/cafe_apartment.jpg', description: '附近没有合适早餐时使用。可优先试泰式奶茶、Oishi 绿茶、M-150 能量饮料、柠檬茶或 Yakult 类乳酸菌饮品；不同门店口味和库存会变化。', tags: ['早餐', '夜宵', '调饮'], query: '7-Eleven Pratunam Bangkok' },
+  siamSkywalk: { name: 'Siam 网红天桥（BTS Siam Skywalk）', city: '曼谷', kind: '拍照点', image: 'web_photos/cafe_apartment.jpg', description: '第一天暹罗商圈的开场拍照点，连接 BTS Siam、Siam Paragon 与 CentralWorld 一带，适合 10:00 后拍城市街景。', tags: ['Siam', '拍照', '天桥'], query: 'BTS Siam Skywalk Bangkok' },
+  siamLunch: { name: 'Siam Paragon Food Hall / Pang Cha', city: '曼谷', kind: '午餐', image: 'web_photos/cafe_apartment.jpg', description: '固定 12:00 用餐，安排在小狮子互动前，避免空腹排队。', tags: ['12:00', '午餐', 'Siam'], query: 'Siam Paragon Food Hall Bangkok' },
+  lionCafe: { name: 'L7 Café 小狮子互动', city: '曼谷', kind: '体验', image: 'web_photos/elephant.jpg', description: '午餐后再去观看小狮子；互动时间和动物状态以当天店家安排为准。', tags: ['小狮子', '下午'], query: 'L7 Cafe lion Bangkok' },
+  paknamOuter: { name: '水门寺外围拍照点 · 796 Soi Thoet Thai 26', city: '曼谷', kind: '外围打卡', image: 'web_photos/paknam.jpg', description: '精确地址：796 Soi Thoet Thai 26。按你的计划不进寺内，只在公共道路与外围区域拍照；注意不要影响住户与交通。', tags: ['精确地址', '外围', '拍照'], query: '796 Soi Thoet Thai 26 Bangkok' },
+  watArunView: { name: 'Wat Arun 对岸 Tha Tien 公共观景点', city: '曼谷', kind: '公共河岸拍照', image: 'web_photos/wat_arun.jpg', description: '在 Tha Tien 河岸公共区域远眺郑王庙，不购买门票也能拍到经典河景；日落前后光线较好。', tags: ['郑王庙', '对岸', '公共观景'], query: 'Tha Tien Pier Wat Arun viewpoint Bangkok' },
+  chatuchakLunch: { name: '乍都乍市集内午餐摊', city: '曼谷', kind: '午餐', image: 'web_photos/an_dong.jpg', description: '市集内就近解决午餐，减少往返；以当天营业摊位和排队情况为准。', tags: ['午餐', '市集'], query: 'Chatuchak Weekend Market food court Bangkok' },
+  massageBangkok: { name: '暹罗/朱拉隆功附近泰式按摩', city: '曼谷', kind: '按摩', image: 'web_photos/cafe_apartment.jpg', description: '第三天晚间安排 60–90 分钟按摩，建议提前预约并确认价格、时长与是否需要现金。', tags: ['第三天晚上', '放松'], query: 'Thai massage Banthat Thong Bangkok' },
+  armyRange: { name: '曼谷陆军射击场（天气不好备选）', city: '曼谷', kind: '天气备选', image: 'web_photos/saigon_square.jpg', description: '替换原海军射击场，距离和动线更适合留在曼谷的一天；务必提前确认开放、证件、年龄和安全要求。', tags: ['第四天备选', '陆军'], query: 'Army Shooting Range Bangkok' },
+  pattayaTour: { name: '芭提雅一日团（天气好二选一）', city: '曼谷', kind: '天气好方案', image: 'web_photos/wat_arun.jpg', description: '天气晴朗且接受长途往返时参加正规一日团。通常早出晚归，可能无法同日完成 ICONSIAM 与 Big C 购物。', tags: ['第四天', '二选一', '报团'], query: 'Pattaya one day tour from Bangkok' },
+  butterCrab: { name: '94 Restaurant 黄油蟹', city: '胡志明', kind: '晚餐', image: 'web_photos/butter_crab.jpg', description: '10 月 6 日抵达并入住后安排的重点晚餐；建议提前确认营业和黄油蟹供应。', tags: ['10 月 6 日', '黄油蟹'], query: '94 Restaurant Ho Chi Minh butter crab' },
+  geylang: { name: 'Quán Geylang Lor 9 牛蛙粥', city: '胡志明', kind: '夜宵', image: 'web_photos/pho_dish.jpg', description: '黄油蟹后若仍有体力再去；可按距离和营业状态决定是否取消。', tags: ['夜宵', '牛蛙粥'], query: 'Quan Geylang Lor 9 Ho Chi Minh City' },
+  vietShampoo: { name: 'Mint Barbershop & Spa 越式洗头', city: '胡志明', kind: '越式洗头', image: 'web_photos/cafe_apartment.jpg', description: '胡志明只安排越式洗头，不安排按摩；建议提前预约，确认服务时长和是否含洗发、头皮护理。', tags: ['越式洗头', '不含按摩'], query: 'Mint Barbershop Spa Vietnamese head spa Ho Chi Minh City' },
+  hcmLunch: { name: 'Phở Việt Nam / Phở Hòa Pasteur', city: '胡志明', kind: '午餐', image: 'web_photos/pho_hoa.jpg', description: '越式洗头后就近吃河粉，作为第一郡老城与女装购物之间的午餐。', tags: ['午餐', '河粉'], query: 'Pho Hoa Pasteur Ho Chi Minh City' },
+  independence: { name: '独立宫外观', city: '胡志明', kind: '下午替代路线', image: 'web_photos/independence_palace.jpg', description: '下午用来替代重复的滨城市场，安排外观拍照即可，是否进馆按体力决定。', tags: ['下午', '地标'], query: 'Independence Palace Ho Chi Minh City' },
+  bookStreet: { name: '胡志明书街', city: '胡志明', kind: '下午替代路线', image: 'web_photos/book_street.jpg', description: '独立宫后顺路逛书街和咖啡店，作为 10 月 7 日下午的轻松替代。', tags: ['书街', '咖啡'], query: 'Ho Chi Minh City Book Street' },
+  ceci: { name: 'Ceci', city: '胡志明', kind: '女装店', image: 'web_photos/saigon_square.jpg', description: '收藏中的女装店，单店按约 30 分钟安排。', tags: ['女装', '约30分钟'], query: 'Ceci clothing Ho Chi Minh City' },
+  datt: { name: 'DATT', city: '胡志明', kind: '女装店', image: 'web_photos/saigon_square.jpg', description: '收藏中的女装店，与第一郡/Nguyễn Trãi 购物段顺路串联。', tags: ['女装', '约30分钟'], query: 'DATT clothing Ho Chi Minh City' },
+  shebyshi: { name: 'She By Shi', city: '胡志明', kind: '女装店', image: 'web_photos/saigon_square.jpg', description: '收藏中的女装店，建议单店停留约 30 分钟，按体力选择。', tags: ['女装', '约30分钟'], query: 'She By Shi Ho Chi Minh City' },
+  glamdoll: { name: 'Glam Doll', city: '胡志明', kind: '女装店', image: 'web_photos/saigon_square.jpg', description: '收藏中的女装店，可作为 Nguyen Trai 购物带的补充站点。', tags: ['女装', '约30分钟'], query: 'Glam Doll clothing Ho Chi Minh City' },
+  thaiFood: { name: '泰国必吃清单', city: '曼谷', kind: '餐饮清单', image: 'web_photos/crab_fried_rice.jpg', description: '旅途中至少尝试抛打饭、冬阴功、mama 面、蟹肉炒饭和榴莲。优先结合当天商圈就近吃，不为单独一家店大幅绕路。', tags: ['抛打饭', '冬阴功', 'mama面', '蟹肉炒饭', '榴莲'], query: 'Thai food Siam Bangkok pad kra pao tom yum crab fried rice durian' },
+  phedMark: { name: 'Phed Mark', city: '曼谷', kind: '泰式餐厅', image: 'web_photos/banthat.jpg', description: '以打抛猪肉饭闻名的餐厅，适合在暹罗/朱拉隆功一带作为打抛饭专门体验；排队和辣度以当天情况为准。', tags: ['打抛饭', '排队'], query: 'Phed Mark Bangkok' },
+  chulaFiftyAlley: { name: '朱拉五十巷泰国厨房', city: '曼谷', kind: '泰式餐厅', image: 'web_photos/banthat.jpg', description: '朱拉隆功/五十巷一带的泰国厨房，作为夜市或 Som Som Seafood 后的餐饮备选，不建议同晚重复点太多。', tags: ['泰餐', '朱拉隆功'], query: 'Chula Fifty Alley Thai Kitchen Bangkok' },
+  keenHouseSomsak: { name: 'A Keen House Somsak Poo Op', city: '曼谷', kind: '泰式海鲜', image: 'web_photos/crab_fried_rice.jpg', description: '收藏中的泰式海鲜店，可优先尝试蟹肉、咖喱或冬阴功；请根据当天位置和营业情况决定是否前往。', tags: ['海鲜', '泰餐'], query: 'A Keen House Somsak Poo Op Bangkok' },
+  littleHanoiEgg: { name: 'Little HaNoi Egg Coffee', city: '胡志明', kind: '咖啡店', image: 'web_photos/cafe_apartment.jpg', description: '胡志明老城/书街段的蛋咖啡补充点，适合下午文化路线后短暂停留。', tags: ['蛋咖啡', '下午'], query: 'Little HaNoi Egg Coffee Ho Chi Minh City' },
+  coTuCaMau: { name: 'Co Tu Ca Mau', city: '胡志明', kind: '越南餐厅', image: 'web_photos/butter_crab.jpg', description: '胡志明晚餐备选，主打越南海鲜风味；可与滨城市场晚餐二选一，按距离和营业状态取舍。', tags: ['越南菜', '海鲜'], query: 'Co Tu Ca Mau Ho Chi Minh City' },
 };
 
 const days = [
-  { date: '10.02', title: '夜间抵达', city: '曼谷', stops: [
-    ['23:05', '去程航班', '九元航空 AQ1267 · 广州白云 T2 → 曼谷素万那普 T1 00:45+1', null],
-    ['00:45', '入住', '曼谷水门伯克利酒店', null],
+  { date: '10.02', title: '夜间抵达曼谷', city: '曼谷', stops: [
+    ['23:05', '去程航班', '九元航空 AQ1267 · 广州白云 T2 → 曼谷素万那普 T1 00:45+1', 'guangzhouAirport,suvarnabhumi'],
+    ['00:45', '入住', '曼谷水门伯克利酒店', 'berkeley'],
   ]},
-  { date: '10.03', title: '老城与河岸', city: '曼谷', stops: [
-    ['09:30', '慢逛河岸', 'Phra Arthit', 'phra'],
-    ['11:30', '河景午餐', 'Eat Sight Story Deck', 'eatSight'],
-    ['16:30', '傍晚街拍', '唐人街（耀华力路）', 'yaowarat'],
-    ['晚餐', '位置备选', 'Bonchon Tha Maharaj / The Local', 'bonchon,local'],
+  { date: '10.03', title: '小狮子、暹罗商圈与朱拉隆功夜市', city: '曼谷', stops: [
+    ['10:00', '早餐/调饮', '7-Eleven：泰式奶茶、Oishi 绿茶、柠檬茶或 Yakult 类饮品', 'sevenEleven'],
+    ['12:00', '午餐', 'Siam Paragon Food Hall / Pang Cha（先吃饭再看小狮子）', 'siamLunch'],
+    ['13:30', '动物互动', 'L7 Café 小狮子互动', 'lionCafe'],
+    ['15:30', '暹罗商圈', 'Siam 网红天桥、Siam Paragon、CentralWorld 一带逛街', 'siamSkywalk'],
+    ['16:00', '打抛饭专门体验', 'Phed Mark（如排队过长，改为 Siam 周边就近打抛饭）', 'phedMark'],
+    ['19:30', '夜间路线', '朱拉隆功夜市', 'chula'],
+    ['20:15', '必吃晚餐', 'Som Som Seafood（蟹肉炒饭等海鲜）', 'somSom'],
+    ['22:00', '泰餐备选', '朱拉五十巷泰国厨房', 'chulaFiftyAlley'],
+    ['22:30', '夜宵', '7-Eleven 补给', 'sevenEleven'],
   ]},
-  { date: '10.04', title: '周末市场与朱拉隆功夜市', city: '曼谷', stops: [
-    ['09:30', '集中逛市集', '扎度扎周末市场', 'chatuchak'],
-    ['13:00', '午餐', 'Baan Kuay Tiew Ruathong', 'noodle'],
-    ['14:30', '商场与甜品', 'Pang Cha Cafe Siam Paragon', 'pangcha'],
-    ['17:30', '采购', 'Big C Supercenter Ratchadamri', 'bigc'],
-    ['19:30', '重点夜间路线', '朱拉隆功夜市', 'chula'],
-    ['20:15', '必吃晚餐', 'Som Som Seafood', 'somSom'],
-    ['21:30', '排队备选', 'Jeh O Chula / Jimjoom99 Banthat Thong / 朱拉厨房', 'jeh,jimjoom,chulakitchen'],
+  { date: '10.04', title: '乍都乍周末集市与唐人街', city: '曼谷', stops: [
+    ['09:30', '早餐/调饮', '7-Eleven 轻食与泰式奶茶/绿茶', 'sevenEleven'],
+    ['10:00', '周末集市', '乍都乍周末集市', 'chatuchak'],
+    ['12:30', '午餐', '乍都乍市集内就近用餐，优先尝试抛打饭或 mama 面', 'chatuchakLunch'],
+    ['15:30', '海鲜备选', 'A Keen House Somsak Poo Op（若顺路且营业）', 'keenHouseSomsak'],
+    ['15:00', '返程休息', '回酒店放下战利品，避开下午高温', 'berkeley'],
+    ['18:00', '晚餐与夜景', '唐人街（耀华力路）', 'yaowarat'],
+    ['22:30', '夜宵', '7-Eleven 补给，可选榴莲或乳酸菌饮品', 'sevenEleven'],
   ]},
-  { date: '10.05', title: '吞武里与河畔夜景', city: '曼谷', stops: [
-    ['09:30', '寺庙', 'Wat Paknam Phasi Charoen', 'paknam'],
-    ['11:15', '运河社区', 'Khlong Bang Luang Floating Market', 'khlong'],
-    ['午餐', '位置备选', 'Baan Kook Kai / SweetCome BKK', 'baanKook,sweetcome'],
-    ['15:30', '河畔商场', '暹罗天地 ICONSIAM', 'iconsiam'],
-    ['18:30', '夜市二选一', '码头夜市 Asiatique', 'asiatique'],
+  { date: '10.05', title: '第四天：天气二选一', city: '曼谷', stops: [
+    ['09:30', '早餐/调饮', '7-Eleven 轻食与 M-150/柠檬茶', 'sevenEleven'],
+    ['10:00', '天气好方案（二选一）', '报名正规芭提雅一日团；长途往返，通常不保证晚间购物', 'pattayaTour'],
+    ['10:00', '天气不好方案（二选一）', '陆军射击场（替换海军射击场）', 'armyRange'],
+    ['12:30', '天气不好午餐', '射击场附近就餐，优先冬阴功或抛打饭', 'baanKook,sweetcome'],
+    ['14:00', '天气不好水上集市', 'Khlong Bang Luang Floating Market', 'khlong'],
+    ['16:30', '天气不好购物', '暹罗天地 ICONSIAM', 'iconsiam'],
+    ['18:30', '天气不好购物', 'Big C Supercenter Ratchadamri', 'bigc'],
+    ['20:30', '天气不好按摩', '暹罗/拉差丹利附近泰式按摩', 'massageBangkok'],
+    ['22:30', '夜宵', '7-Eleven 补给，可选 mama 面或泰式奶茶', 'sevenEleven'],
   ]},
   { date: '10.06', title: '曼谷 → 胡志明', city: '转场', stops: [
-    ['09:00', '前往机场', '从曼谷水门伯克利酒店前往廊曼机场 T1', null],
-    ['13:40', '城市转场', '泰国亚洲航空 FD654 · 廊曼 T1 → 新山一 T2 15:20', null],
-    ['14:00', '入住时间', 'Chip Homestay & Studio · 981 Đường Lê Lai', null],
-    ['18:30', '轻松晚餐', 'Pho Quynh / Five Boys Number One Smoothies', 'phoQuynh,fiveBoys'],
+    ['08:30', '早餐/调饮', '曼谷酒店附近 7-Eleven', 'sevenEleven'],
+    ['09:00', '前往机场', '曼谷水门伯克利酒店 → 廊曼机场 T1', 'berkeley,donMueang'],
+    ['13:40', '城市转场', '泰国亚洲航空 FD654 · 廊曼 T1 → 新山一 T2 15:20', 'donMueang,tanSonNhat'],
+    ['16:00', '入住', 'Chip Homestay & Studio · 981 Đường Lê Lai', 'chipHomestay'],
+    ['17:00', '附近女装店串联', 'Chip Homestay 周边第一郡女装店：Ceci / DATT / She By Shi / Glam Doll（每家约 30 分钟，选 2–3 家）', 'ceci,datt,shebyshi,glamdoll'],
+    ['19:30', '重点晚餐', '94 Restaurant 黄油蟹', 'butterCrab'],
   ]},
-  { date: '10.07', title: '第一郡老城与 Nguyễn Trãi 购物带', city: '胡志明', stops: [
-    ['09:00', '城市地标', 'Saigon Central Post Office', 'post'],
-    ['10:00', '街区散步', '西贡圣母大教堂外部', 'notre'],
-    ['11:30', '午餐', 'Phở Hòa Pasteur', 'phoHoa'],
+  { date: '10.07', title: '胡志明老城、女装与晚间越式洗头', city: '胡志明', stops: [
+    ['09:30', '早餐/调饮', '胡志明酒店附近 7-Eleven', 'sevenEleven'],
+    ['10:00', '城市地标', 'Tân Định 粉色教堂', 'tanDinh'],
+    ['11:00', '城市地标', 'Saigon Central Post Office', 'post'],
+    ['11:30', '教堂外部', '西贡圣母大教堂外部', 'notre'],
+    ['12:00', '午餐', 'Phở Việt Nam / Phở Hòa Pasteur', 'hcmLunch'],
     ['13:30', '室内文化点', 'Ho Chi Minh City Fine Arts Museum', 'fineArts'],
-    ['15:15', '市场与小吃', '滨城市场', 'benthanh'],
-    ['17:00-21:00', '女装串联（每家约30分钟）', 'The MAVEN / 21Six / CHATS / Aanh-Jiki / MOLLYNISTA / COCOSIN / L’ESPOIR / LA VIERGE / LSOUL / JUBIN Studio / HUONG Boutique / Bliss Vintage', 'maven,six,chats,aanh,mollynista,cocosin,espoir,lavierge,lsoul,jubin,huong,bliss'],
-    ['晚间', '咖啡收尾', 'The Workshop Coffee', 'workshop'],
+    ['15:00', '下午替代路线', '独立宫外观 + 书街/咖啡街，避开重复滨城市场', 'independence,bookStreet'],
+    ['16:00', '下午咖啡', 'Little HaNoi Egg Coffee', 'littleHanoiEgg'],
+    ['16:30', '女装店串联', 'The MAVEN / 21Six / CHATS / Aanh-Jiki / MOLLYNISTA / COCOSIN / L’ESPOIR / LA VIERGE / LSOUL / JUBIN Studio / HUONG Boutique / Bliss Vintage（每家约 30 分钟，按区域和体力选择）', 'maven,six,chats,aanh,mollynista,cocosin,espoir,lavierge,lsoul,jubin,huong,bliss'],
+    ['19:30', '晚餐与夜景', '滨城市场及周边晚餐（只安排晚上去）/ Co Tu Ca Mau（二选一）', 'benthanh,coTuCaMau'],
+    ['21:00', '越式洗头', 'Mint Barbershop & Spa（晚饭后；只安排越式洗头，不安排按摩）', 'vietShampoo'],
+    ['23:00', '夜宵', 'Quán Geylang Lor 9 牛蛙粥（与黄油蟹分开安排在 10 月 7 日）', 'geylang'],
   ]},
   { date: '10.08', title: '返程日', city: '胡志明', stops: [
-    ['04:30', '提前退房', '联系 Chip Homestay 确认行李与退房方式', null],
-    ['05:00', '前往机场', '从 981 Đường Lê Lai 前往新山一国际机场 T2', null],
+    ['03:30', '提前退房', '联系 Chip Homestay 确认行李与退房方式', 'chipHomestay'],
+    ['04:00', '前往机场', '从 981 Đường Lê Lai 前往新山一国际机场 T2', 'chipHomestay,tanSonNhat'],
     ['07:10', '返程航班', '国泰航空 CX786 · 胡志明 → 中国香港 10:55', null],
-    ['原计划', '第三郡与购物', 'Tân Định Church / Cà phê Linh / 服装店', 'tanDinh,linh,clothes'],
+    ['退税提示', '机场办理', '如购物店家提供合规退税单，直接在机场按指引办理；不为退税专门绕路。', 'tanSonNhat'],
   ]},
 ];
 
@@ -110,6 +153,8 @@ function mapsEmbed(query) {
 function staticImage(path) {
   return window.location.hostname.endsWith('github.io') ? path.split('/').pop() : path;
 }
+
+
 
 function renderRoute(city = 'all') {
   routeList.innerHTML = '';
@@ -159,12 +204,22 @@ function selectPlace(key, button) {
   panel.hidden = false;
 }
 
+function photoLinks(place) {
+  const googleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(place.query)}`;
+  const isClothing = /女装|服装/.test(place.kind || '') || /女装|服装/.test(place.name || '');
+  if (isClothing) {
+    const igUrl = `https://www.instagram.com/explore/search/keyword/?q=${encodeURIComponent(place.name)}`;
+    return `<a class="photo-link" href="${igUrl}" target="_blank" rel="noopener">Instagram 店铺图片</a><a class="photo-link fallback" href="${googleUrl}" target="_blank" rel="noopener">没有对应账号？查看 Google 图片</a>`;
+  }
+  return `<a class="photo-link" href="${googleUrl}" target="_blank" rel="noopener">查看 Google 图片</a>`;
+}
+
 function placeDetailMarkup(place) {
-  return `<div class="detail-content"><img class="detail-media" src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">本地静态参考图 · Google Maps 页内定位 · 营业状态和分店请以当天地图为准</div></div>`;
+  return `<div class="detail-content"><div class="online-photo"><img class="detail-media" src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="photo-source">${photoLinks(place)}</div></div><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">图片优先提供 Instagram 店铺入口；无对应账号时使用 Google 图片 · Google Maps 页内定位</div></div>`;
 }
 
 function inlinePlaceMarkup(place) {
-  return `<div class="inline-place-content"><img src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
+  return `<div class="inline-place-content"><div><img src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="photo-source">${photoLinks(place)}</div></div><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
 }
 
 function attachInlineLocations() {
