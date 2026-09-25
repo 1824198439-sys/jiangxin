@@ -101,16 +101,18 @@ const days = [
 ];
 
 const routeList = document.querySelector('#route-list');
-const detail = document.querySelector('#place-detail');
 const tabs = [...document.querySelectorAll('.city-tab')];
 
 function mapsEmbed(query) {
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed&z=15`;
 }
 
+function staticImage(path) {
+  return window.location.hostname.endsWith('github.io') ? path.split('/').pop() : path;
+}
+
 function renderRoute(city = 'all') {
   routeList.innerHTML = '';
-  resetDetail();
   const filteredDays = days.filter(day => city === 'all' || day.city.includes(city) || day.stops.some(stop => (stop[3] || '').split(',').some(key => places[key]?.city.includes(city))));
   const firstPlaceDay = filteredDays.findIndex(day => day.stops.some(stop => stop[3]));
   filteredDays.forEach((day, dayIndex) => {
@@ -126,7 +128,10 @@ function renderRoute(city = 'all') {
       const place = key ? places[key] : null;
       const placeKeys = key ? key.split(',') : [];
       const linkedPlaces = placeKeys.map(placeKey => places[placeKey]).filter(Boolean);
-      stop.innerHTML = `<div class="stop-time">${time}</div><div class="stop-content"><div class="stop-kind">${kind}</div>${linkedPlaces.length ? linkedPlaces.map(place => `<button class="place-toggle" type="button" data-place="${Object.keys(places).find(placeKey => places[placeKey] === place)}" aria-expanded="false">${place.name}</button>`).join('') : `<strong class="plain-stop">${label}</strong>`}<p class="stop-note">${linkedPlaces.length > 1 ? '点击任一店名查看单独的地图和参考图。' : linkedPlaces[0]?.description || ''}</p></div>`;
+      stop.innerHTML = `<div class="stop-time">${time}</div><div class="stop-content"><div class="stop-kind">${kind}</div><div class="stop-places">${linkedPlaces.length ? linkedPlaces.map(place => {
+        const placeKey = Object.keys(places).find(candidate => places[candidate] === place);
+        return `<button class="place-toggle" type="button" data-place="${placeKey}" aria-expanded="false" aria-controls="route-place-${placeKey}">${place.name}</button>`;
+      }).join('') : `<strong class="plain-stop">${label}</strong>`}</div><p class="stop-note">${linkedPlaces.length > 1 ? '点击任一店名，图片和地图会在这里展开。' : linkedPlaces[0]?.description || ''}</p><div class="stop-inline-detail" hidden aria-live="polite"></div></div>`;
       list.appendChild(stop);
     });
     routeList.appendChild(group);
@@ -134,20 +139,32 @@ function renderRoute(city = 'all') {
   routeList.querySelectorAll('.place-toggle').forEach(button => button.addEventListener('click', () => selectPlace(button.dataset.place, button)));
 }
 
-function resetDetail() {
-  detail.innerHTML = `<div class="detail-empty"><div class="detail-pin">◎</div><strong>点击一个地点</strong><p>路线里的店名、景点和酒店都可以展开。这里会显示地图定位和参考图片。</p></div>`;
-}
-
 function selectPlace(key, button) {
   const place = places[key];
+  const panel = button.closest('.stop').querySelector('.stop-inline-detail');
+  const shouldClose = !panel.hidden && panel.dataset.place === key;
+
+  routeList.querySelectorAll('.stop-inline-detail').forEach(item => {
+    item.hidden = true;
+    item.innerHTML = '';
+    delete item.dataset.place;
+  });
   routeList.querySelectorAll('.place-toggle').forEach(item => item.setAttribute('aria-expanded', 'false'));
-  if (button) button.setAttribute('aria-expanded', 'true');
-  detail.innerHTML = `<div class="detail-content"><img class="detail-media" src="${place.image}" alt="${place.name} 参考图" /><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">Google Maps 页内定位 · 参考图片用于辨认，营业状态和分店请以当天地图为准</div></div>`;
-  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  if (shouldClose) return;
+
+  button.setAttribute('aria-expanded', 'true');
+  panel.id = `route-place-${key}`;
+  panel.innerHTML = placeDetailMarkup(place);
+  panel.dataset.place = key;
+  panel.hidden = false;
+}
+
+function placeDetailMarkup(place) {
+  return `<div class="detail-content"><img class="detail-media" src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">本地静态参考图 · Google Maps 页内定位 · 营业状态和分店请以当天地图为准</div></div>`;
 }
 
 function inlinePlaceMarkup(place) {
-  return `<div class="inline-place-content"><img src="${place.image}" alt="${place.name} 参考图" /><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
+  return `<div class="inline-place-content"><img src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
 }
 
 function attachInlineLocations() {

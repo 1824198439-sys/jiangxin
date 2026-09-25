@@ -114,7 +114,7 @@ h2 { margin-bottom: 0; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; let
 .city-switcher { display: inline-flex; gap: 4px; padding: 4px; border-radius: 8px; background: #e9ebe5; }
 .city-tab { min-height: 34px; padding: 0 13px; border: 0; border-radius: 5px; color: var(--muted); background: transparent; font-size: 13px; }
 .city-tab.active { color: #fff; background: var(--green); font-weight: 800; }
-.route-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr); gap: 18px; align-items: start; }
+.route-layout { display: block; }
 .route-list { display: grid; gap: 25px; }
 .day-group { position: relative; }
 .day-header { display: flex; align-items: baseline; gap: 14px; padding: 0 0 12px 17px; border-bottom: 1px solid var(--line); cursor: pointer; }
@@ -130,20 +130,16 @@ h2 { margin-bottom: 0; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; let
 .stop-time { color: var(--muted); font-size: 12px; line-height: 1.4; }
 .stop-content { min-width: 0; }
 .stop-kind { margin-bottom: 3px; color: var(--muted); font-size: 11px; }
+.stop-places { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .place-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 0; border: 0; color: var(--ink); background: transparent; text-align: left; font-size: 16px; font-weight: 800; }
-.place-toggle + .place-toggle { margin-left: 12px; }
-.place-toggle::after { content: "↗"; color: var(--coral); font-size: 13px; transition: transform .2s ease; }
+.place-toggle::after { content: "⌄"; color: var(--coral); font-size: 13px; transition: transform .2s ease; }
 .place-toggle:hover { color: var(--coral); }
-.place-toggle[aria-expanded="true"]::after { transform: rotate(90deg); }
+.place-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
 .stop-note { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
 
-.place-detail { position: sticky; top: 90px; min-height: 500px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
-.detail-empty { min-height: 500px; display: grid; place-items: center; align-content: center; padding: 40px; text-align: center; }
-.detail-pin { display: grid; place-items: center; width: 60px; height: 60px; margin-bottom: 15px; border-radius: 50%; color: #fff; background: var(--green); font-size: 28px; }
-.detail-empty strong { font-size: 18px; }
-.detail-empty p { max-width: 260px; margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.stop-inline-detail { margin-top: 14px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: 0 8px 24px rgba(28, 52, 41, .08); }
 .detail-content { display: grid; }
-.detail-media { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: #e7e8e2; }
+.detail-media { width: 100%; max-height: 420px; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: #e7e8e2; }
 .detail-body { padding: 20px; }
 .detail-kicker { margin: 0 0 7px; color: var(--coral); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
 .detail-body h3 { margin: 0 0 7px; font-size: 24px; line-height: 1.15; }
@@ -162,8 +158,6 @@ h2 { margin-bottom: 0; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; let
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 30px; padding-top: 50px; }
   .hero-route { max-width: 560px; }
-  .route-layout { grid-template-columns: 1fr; }
-  .place-detail { position: relative; top: auto; }
   .practical-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
@@ -189,8 +183,10 @@ h2 { margin-bottom: 0; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; let
   .day-city { width: 100%; margin-left: 0; }
   .stop { grid-template-columns: 65px 1fr; gap: 10px; }
   .day-header { padding-left: 9px; }
-  .place-detail { min-height: 0; }
-  .detail-empty { min-height: 310px; }
+  .stop-inline-detail { margin-top: 12px; }
+  .detail-body { padding: 16px; }
+  .detail-body h3 { font-size: 20px; }
+  .map-frame { height: 230px; }
   .practical-grid { grid-template-columns: 1fr; }
   .footer { flex-direction: column; }
   .inline-place-content { grid-template-columns: 1fr; }
