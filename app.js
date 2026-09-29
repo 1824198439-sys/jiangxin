@@ -77,6 +77,12 @@ const places = {
   coTuCaMau: { name: 'Co Tu Ca Mau', city: '胡志明', kind: '越南餐厅', image: 'web_photos/butter_crab.jpg', description: '胡志明晚餐备选，主打越南海鲜风味；可与滨城市场晚餐二选一，按距离和营业状态取舍。', tags: ['越南菜', '海鲜'], query: 'Co Tu Ca Mau Ho Chi Minh City' },
 };
 
+// Google Maps detail-page primary photos saved in the repository.
+const googleImages = {
+  suvarnabhumi: 'google_photos/suvarnabhumi.jpg', berkeley: 'google_photos/berkeley.jpg', phra: 'google_photos/phra.jpg', bonchon: 'google_photos/bonchon.jpg', local: 'google_photos/local.jpg', chatuchak: 'google_photos/chatuchak.jpg', pangcha: 'google_photos/pangcha.jpg', jimjoom: 'google_photos/jimjoom.jpg', chulakitchen: 'google_photos/chulakitchen.jpg', asiatique: 'google_photos/asiatique.jpg', fiveBoys: 'google_photos/fiveBoys.jpg', post: 'google_photos/post.jpg', notre: 'google_photos/notre.jpg', phoHoa: 'google_photos/phoHoa.jpg', fineArts: 'google_photos/fineArts.jpg', maven: 'google_photos/maven.jpg', aanh: 'google_photos/aanh.jpg', mollynista: 'google_photos/mollynista.jpg', espoir: 'google_photos/espoir.jpg', lavierge: 'google_photos/lavierge.jpg', sweetcome: 'google_photos/sweetcome.jpg', tanDinh: 'google_photos/tanDinh.jpg', lionCafe: 'google_photos/lionCafe.jpg', geylang: 'google_photos/geylang.jpg', hcmLunch: 'google_photos/hcmLunch.jpg', independence: 'google_photos/independence.jpg', bookStreet: 'google_photos/bookStreet.jpg', coTuCaMau: 'google_photos/coTuCaMau.jpg',
+};
+Object.entries(googleImages).forEach(([key, image]) => { if (places[key]) places[key].googleImage = image; });
+
 const days = [
   { date: '10.02', title: '夜间抵达曼谷', city: '曼谷', stops: [
     ['23:05', '去程航班', '九元航空 AQ1267 · 广州白云 T2 → 曼谷素万那普 T1 00:45+1', 'guangzhouAirport,suvarnabhumi'],
@@ -151,9 +157,15 @@ function mapsEmbed(query) {
 }
 
 function staticImage(path) {
-  return window.location.hostname.endsWith('github.io') ? path.split('/').pop() : path;
+  if (!path) return '';
+  return window.location.hostname.endsWith('github.io') && !path.startsWith('google_photos/') ? path.split('/').pop() : path;
 }
 
+function placeImageMarkup(place, className, alt) {
+  const primary = staticImage(place.googleImage || place.image);
+  const fallback = staticImage(place.image);
+  return `<img class="${className}" src="${primary}" data-fallback="${fallback}" alt="${alt}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback" />`;
+}
 
 
 function renderRoute(city = 'all') {
@@ -215,11 +227,11 @@ function photoLinks(place) {
 }
 
 function placeDetailMarkup(place) {
-  return `<div class="detail-content"><div class="online-photo"><img class="detail-media" src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="photo-source">${photoLinks(place)}</div></div><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">图片优先提供 Instagram 店铺入口；无对应账号时使用 Google 图片 · Google Maps 页内定位</div></div>`;
+  return `<div class="detail-content"><div class="online-photo">${placeImageMarkup(place, 'detail-media', `${place.name} Google 地图主图`)}<div class="photo-source">${photoLinks(place)}</div></div><div class="detail-body"><p class="detail-kicker">${place.city} · ${place.kind}</p><h3>${place.name}</h3><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div><iframe class="map-frame" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe><div class="map-caption">图片为 Google 地图地点详情页主图的仓库副本；加载失败时自动回退到参考图 · Google Maps 页内定位</div></div>`;
 }
 
 function inlinePlaceMarkup(place) {
-  return `<div class="inline-place-content"><div><img src="${staticImage(place.image)}" alt="${place.name} 参考图" loading="lazy" /><div class="photo-source">${photoLinks(place)}</div></div><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
+  return `<div class="inline-place-content"><div>${placeImageMarkup(place, '', `${place.name} Google 地图主图`)}<div class="photo-source">${photoLinks(place)}</div></div><div><p class="detail-kicker">${place.city} · ${place.kind}</p><h4>${place.name}</h4><p>${place.description}</p><div class="detail-meta">${place.tags.map(tag => `<span class="detail-chip">${tag}</span>`).join('')}</div></div></div><iframe class="inline-map" title="${place.name} 的 Google Maps 定位" loading="lazy" src="${mapsEmbed(place.query)}"></iframe>`;
 }
 
 function attachInlineLocations() {
